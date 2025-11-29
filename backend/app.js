@@ -2,13 +2,15 @@ const express = require('express')
 const authRouter = require('./router/authRoute.js');
 const databaseConnect = require('./config/databaseConfig.js');
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser());
 
 //database connection
-databaseConnect()
+databaseConnect();
 
 app.use('/api/auth/', authRouter)
 

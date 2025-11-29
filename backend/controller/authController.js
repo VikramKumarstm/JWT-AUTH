@@ -104,7 +104,31 @@ const signin = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    const userId = req.user.id
+    
+    try {
+
+        const user = await userModel.findById(userId)
+
+        res.status(200).json({
+            success: true,
+            data: user
+        })
+
+        
+    } catch (error) {
+        console.error("Error :", error);
+        res.status(400).json({
+            success: true,
+            message: error.message
+        })
+        
+    }
+}
+
 module.exports = {
     signup,
-    signin
+    signin,
+    getUser
 }
